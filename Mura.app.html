@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html lang="kk" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mura.app — Қазақстан тарихынан премиум дайындық</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            900: '#14532d',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+        .dark .glass-card {
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(156, 163, 175, 0.4);
+            border-radius: 9999px;
+        }
+    </style>
+</head>
+<body class="h-full bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300 flex flex-col justify-between">
+
+    <!-- FULL SCREEN LOGIN SCREEN -->
+    <div id="full-auth-screen" class="fixed inset-0 z-50 bg-gradient-to-br from-slate-100 via-emerald-50 to-slate-200 dark:from-slate-950 dark:via-emerald-950 dark:to-slate-900 flex items-center justify-center p-4">
+        <div class="absolute -top-32 -left-32 w-80 h-80 bg-emerald-500/10 dark:bg-emerald-500/20 rounded-full blur-3xl pointer-events-none animate-pulse"></div>
+        <div class="absolute -bottom-32 -right-32 w-80 h-80 bg-amber-500/10 dark:bg-amber-500/20 rounded-full blur-3xl pointer-events-none animate-pulse"></div>
+
+        <div class="glass-card rounded-[2.5rem] max-w-md w-full p-8 md:p-10 space-y-8 relative z-10">
+            <div class="text-center space-y-3">
+                <div class="w-20 h-20 rounded-3xl bg-gradient-to-tr from-amber-500 via-emerald-600 to-teal-600 text-white flex items-center justify-center text-3xl mx-auto shadow-2xl shadow-emerald-500/40">
+                    <i class="fa-solid fa-landmark"></i>
+                </div>
+                <h1 class="text-2xl md:text-3xl font-black tracking-tight bg-gradient-to-r from-emerald-600 via-teal-600 to-amber-600 dark:from-emerald-400 dark:via-teal-300 dark:to-amber-300 bg-clip-text text-transparent">Mura.app Platform</h1>
+                <p class="text-slate-600 dark:text-slate-300 text-xs md:text-sm">ҰБТ-ға дайындық жүйесі. Жеке аккаунтпен кіріңіз.</p>
+            </div>
+
+            <div class="space-y-4">
+                <div class="space-y-1.5">
+                    <label class="text-[11px] font-extrabold text-slate-700 dark:text-slate-200 uppercase tracking-wider">Логин (Пайдаланушы аты)</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400"><i class="fa-solid fa-user"></i></span>
+                        <input type="text" id="login-username" placeholder="Мысалы: sayanabdilla" class="w-full pl-11 pr-5 py-3.5 rounded-2xl bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 placeholder-slate-400 border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm font-bold shadow-sm">
+                    </div>
+                </div>
+
+                <div class="space-y-1.5">
+                    <label class="text-[11px] font-extrabold text-slate-700 dark:text-slate-200 uppercase tracking-wider">Құпия сөз (Пароль)</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400"><i class="fa-solid fa-lock"></i></span>
+                        <input type="password" id="login-password" placeholder="••••••••" class="w-full pl-11 pr-5 py-3.5 rounded-2xl bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 placeholder-slate-400 border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm font-bold shadow-sm">
+                    </div>
+                </div>
+
+                <div id="login-error-msg" class="text-xs text-rose-500 dark:text-rose-400 font-bold hidden text-center bg-rose-500/10 py-2.5 rounded-xl border border-rose-500/20">Логин немесе құпия сөз қате!</div>
+
+                <button onclick="handleLogin()" class="w-full py-4 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-extrabold text-sm shadow-xl shadow-emerald-600/30 transition-all transform active:scale-95">
+                    Жүйеге кіру
+                </button>
+            </div>
+
+            <p class="text-[10px] text-slate-500 dark:text-slate-400 text-center">© 2026 Mura.app. Барлық құқықтар қорғалған.</p>
+        </div>
+    </div>
+
+    <!-- MAIN APP WRAPPER -->
+    <div id="main-app-wrapper" class="hidden flex-col h-full justify-between">
+        <header class="sticky top-0 z-40 glass-card border-b border-slate-200 dark:border-slate-800 px-4 lg:px-12 py-4 flex items-center justify-between shadow-sm">
+            <!-- Brand / Logo on the LEFT -->
+            <div class="flex items-center space-x-3 cursor-pointer group" onclick="navigateTo('home')">
+                <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-amber-500 via-emerald-600 to-teal-600 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-emerald-500/20 group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-landmark"></i>
+                </div>
+                <div>
+                    <span class="text-xl font-black tracking-tight bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent">Mura.app</span>
+                    <span class="text-[10px] block text-slate-500 dark:text-slate-400 font-semibold uppercase tracking-wider">ҰБТ Премиум Дайындық</span>
+                </div>
+            </div>
+
+            <!-- Navigation Menu & Actions on the RIGHT -->
+            <div class="flex items-center space-x-2 md:space-x-4">
+                <nav class="hidden md:flex items-center space-x-1 bg-slate-200/60 dark:bg-slate-900/50 p-1.5 rounded-2xl border border-slate-300/40 dark:border-slate-800/60">
+                    <button onclick="navigateTo('home')" id="nav-home" class="nav-btn px-4 py-2 rounded-xl text-xs font-bold transition-all text-emerald-600 bg-white dark:bg-slate-800 shadow-sm">Басты бет</button>
+                    <button onclick="navigateTo('stages')" id="nav-stages" class="nav-btn px-4 py-2 rounded-xl text-xs font-bold transition-all text-slate-600 dark:text-slate-300 hover:text-emerald-600">Тест & Кезеңдер</button>
+                    <button onclick="navigateTo('profile')" id="nav-profile" class="nav-btn px-4 py-2 rounded-xl text-xs font-bold transition-all text-slate-600 dark:text-slate-300 hover:text-emerald-600">Профиль</button>
+                    <button onclick="navigateTo('settings')" id="nav-settings" class="nav-btn px-4 py-2 rounded-xl text-xs font-bold transition-all text-slate-600 dark:text-slate-300 hover:text-emerald-600">Баптаулар</button>
+                </nav>
+
+                <button onclick="toggleDarkMode()" class="w-10 h-10 rounded-xl glass-card flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-800 transition-all text-slate-600 dark:text-slate-300 border border-slate-300/40 dark:border-slate-800">
+                    <i id="theme-icon" class="fa-solid fa-sun"></i>
+                </button>
+
+                <div id="auth-status-container"></div>
+            </div>
+        </header>
+
+        <main class="flex-grow max-w-7xl w-full mx-auto px-4 lg:px-8 py-8">
+
+            <!-- HOME VIEW -->
+            <div id="view-home" class="view-section space-y-12">
+                <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-600 via-teal-700 to-slate-900 text-white p-8 md:p-14 shadow-2xl">
+                    <div class="absolute -right-20 -bottom-20 w-96 h-96 bg-amber-500/15 rounded-full blur-3xl pointer-events-none"></div>
+                    <div class="relative z-10 max-w-2xl space-y-6">
+                        <span class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-md text-xs font-bold tracking-wide uppercase border border-white/25">
+                            <i class="fa-solid fa-bolt text-amber-300"></i> <span>ҰБТ-2026 Ең үздік платформасы</span>
+                        </span>
+                        <h1 id="home-greeting-title" class="text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">Салем, Sayan! 🚀</h1>
+                        <p class="text-slate-100 text-base md:text-lg leading-relaxed">Ежелгі дәуірден тәуелсіздікке дейінгі барлық кезеңдер бойынша сапалы сұрақтар мен интерактивті тесттер.</p>
+                        <div class="flex flex-wrap gap-4 pt-2">
+                            <button onclick="navigateTo('stages')" class="px-7 py-3.5 rounded-2xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold transition-all shadow-xl shadow-amber-500/25 flex items-center space-x-2.5">
+                                <span>Тест пен кезеңдерге өту</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                            <button onclick="navigateTo('profile')" class="px-7 py-3.5 rounded-2xl bg-white/15 hover:bg-white/25 backdrop-blur-md text-white font-bold transition-all border border-white/25">
+                                Жеке кабинетке кіру
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-3xl p-6 md:p-8 shadow-sm border border-slate-200 dark:border-slate-800 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-2.5 h-full bg-gradient-to-b from-emerald-500 to-teal-600"></div>
+                    <div class="flex items-start space-x-5">
+                        <div class="w-14 h-14 rounded-2xl bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center flex-shrink-0 text-2xl font-bold shadow-inner">
+                            <i class="fa-solid fa-quote-left"></i>
+                        </div>
+                        <div class="space-y-2">
+                            <h3 class="text-xs font-extrabold uppercase tracking-widest text-emerald-600 dark:text-emerald-400">Мотивация</h3>
+                            <p id="daily-quote" class="text-xl md:text-2xl font-semibold italic text-slate-700 dark:text-slate-200">"Өткенін білмеген, болашағын болжай алмайды."</p>
+                            <p id="daily-author" class="text-sm font-bold text-slate-500 dark:text-slate-400">— Қазақ мақалы</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STAGES VIEW -->
+            <div id="view-stages" class="view-section hidden space-y-8">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <h2 class="text-3xl font-extrabold tracking-tight">Тарихи 4 Кезең</h2>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm">Дайындықты бастау үшін қажетті кезеңді таңдаңыз.</p>
+                    </div>
+                    <button onclick="navigateTo('home')" class="px-4 py-2 rounded-xl glass-card text-xs font-bold hover:bg-slate-100 dark:hover:bg-slate-800 self-start">
+                        <i class="fa-solid fa-arrow-left mr-2"></i> Басты бетке
+                    </button>
+                </div>
+
+                <div id="main-stages-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+
+                <div id="substages-container" class="hidden space-y-6 pt-6 border-t border-slate-200 dark:border-slate-800">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 id="selected-stage-title" class="text-2xl font-bold">Ішкі тараулар</h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400">Тарауды басып тестті іске қосыңыз.</p>
+                        </div>
+                        <button onclick="closeSubStages()" class="text-sm font-bold text-emerald-600 dark:text-emerald-400 hover:underline">
+                            <i class="fa-solid fa-xmark mr-1"></i> Кезеңдерге қайту
+                        </button>
+                    </div>
+                    <div id="substages-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+                </div>
+            </div>
+
+            <!-- ACTIVITY (TEST) VIEW -->
+            <div id="view-activity" class="view-section hidden space-y-6 max-w-3xl mx-auto">
+                <div class="flex items-center justify-between glass-card p-4 rounded-2xl">
+                    <div>
+                        <span id="activity-topic-badge" class="px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 text-xs font-bold uppercase tracking-wider">Кезең</span>
+                        <h2 id="activity-title" class="text-lg font-bold mt-1">Тақырып атауы</h2>
+                    </div>
+                    <button onclick="exitActivity()" class="px-3.5 py-2 rounded-xl glass-card text-xs font-bold hover:bg-rose-50 hover:text-rose-600 dark:hover:bg-rose-950/50 dark:hover:text-rose-400 transition-all">
+                        Шығу
+                    </button>
+                </div>
+
+                <div id="test-runner-container" class="glass-card rounded-3xl p-6 md:p-8 space-y-6 shadow-2xl border border-slate-200 dark:border-slate-800">
+                    <div class="flex items-center justify-between text-xs font-bold text-slate-500 dark:text-slate-400 pb-4 border-b border-slate-200 dark:border-slate-800">
+                        <span id="test-progress-text">Сұрақ 1 / 20</span>
+                        <div class="flex items-center space-x-3">
+                            <span id="test-timer" class="flex items-center space-x-1"><i class="fa-regular fa-clock"></i> <span id="timer-val">00:00</span></span>
+                            <button onclick="finishTest()" class="px-3 py-1 rounded-lg bg-rose-500/10 text-rose-600 hover:bg-rose-500/20 text-[11px] font-extrabold border border-rose-500/20 transition-all">
+                                Аяқтау
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h3 id="question-text" class="text-xl font-bold leading-snug">Сұрақ мәтіні осында шығады...</h3>
+                        <div id="options-container" class="space-y-3 pt-2"></div>
+                        <div id="instant-feedback-box" class="hidden p-4 rounded-2xl font-bold text-xs"></div>
+                    </div>
+
+                    <div class="flex items-center justify-between pt-6 border-t border-slate-200 dark:border-slate-800">
+                        <button onclick="prevQuestion()" id="btn-prev" class="px-5 py-2.5 rounded-xl glass-card text-xs font-bold disabled:opacity-40 disabled:cursor-not-allowed">
+                            <i class="fa-solid fa-arrow-left mr-2"></i> Артқа
+                        </button>
+                        <button onclick="nextQuestion()" id="btn-next" class="px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-lg shadow-emerald-500/20">
+                            Алға <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="test-results-container" class="hidden glass-card rounded-3xl p-8 space-y-6 shadow-2xl">
+                    <div class="w-20 h-20 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 mx-auto flex items-center justify-center text-3xl font-extrabold shadow-inner">
+                        <i class="fa-solid fa-trophy"></i>
+                    </div>
+                    <div class="space-y-2 text-center">
+                        <h3 class="text-2xl font-extrabold">Тест сәтті аяқталды!</h3>
+                        <p class="text-slate-500 text-xs">Сіздің жинаған нәтижеңіз:</p>
+                        <div class="text-5xl font-black bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent pt-2" id="final-score-val">20 / 20</div>
+                    </div>
+
+                    <!-- MISTAKES SUMMARY -->
+                    <div class="space-y-3 pt-4 border-t border-slate-200 dark:border-slate-800">
+                        <h4 class="font-bold text-sm text-rose-500 flex items-center"><i class="fa-solid fa-circle-exclamation mr-2"></i> Қате жіберілген сұрақтар мен талдау:</h4>
+                        <div id="result-mistakes-list" class="space-y-3 max-h-60 overflow-y-auto pr-2"></div>
+                    </div>
+
+                    <div class="flex justify-center gap-4 pt-4">
+                        <button onclick="restartTest()" class="px-6 py-3 rounded-xl bg-emerald-600 text-white font-bold text-xs shadow-lg shadow-emerald-500/20">Қайта тапсыру</button>
+                        <button onclick="navigateTo('stages')" class="px-6 py-3 rounded-xl glass-card font-bold text-xs">Кезеңдерге оралу</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROFILE VIEW -->
+            <div id="view-profile" class="view-section hidden space-y-8 max-w-4xl mx-auto">
+                <div class="glass-card rounded-3xl p-8 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div class="flex items-center space-x-6">
+                        <div class="w-20 h-20 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-600 text-white flex items-center justify-center text-3xl font-extrabold shadow-lg shadow-emerald-500/30" id="profile-avatar-initials">ҚҰ</div>
+                        <div class="space-y-1">
+                            <div class="flex items-center space-x-3">
+                                <h2 id="profile-name" class="text-2xl font-extrabold">Қолданушы Аты</h2>
+                                <span id="profile-role-badge" class="px-3 py-1 rounded-full text-[10px] font-bold bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400">Қолданушы</span>
+                            </div>
+                            <p id="profile-email" class="text-xs text-slate-500 dark:text-slate-400">user@tarihubt.kz</p>
+                        </div>
+                    </div>
+                    <button onclick="logout()" class="px-5 py-2.5 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-600 dark:text-rose-400 font-bold text-xs transition-all border border-rose-500/20">
+                        <i class="fa-solid fa-right-from-bracket mr-2"></i> Шығу
+                    </button>
+                </div>
+
+                <!-- ANALYTICS & STATS -->
+                <div class="glass-card rounded-3xl p-8 space-y-6">
+                    <div class="flex items-center space-x-3 text-emerald-600 dark:text-emerald-400">
+                        <i class="fa-solid fa-chart-pie text-2xl"></i>
+                        <div>
+                            <h3 class="text-xl font-bold">Статистика және Прогресс</h3>
+                            <p class="text-xs text-slate-500">Тапсырылған тесттер нәтижелері мен деңгейлік көрсеткіштер.</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+                        <div class="glass-card rounded-2xl p-5 space-y-2 border border-slate-200 dark:border-slate-800">
+                            <span class="text-xs text-slate-500 font-bold">Тапсырылған тесттер</span>
+                            <div class="text-3xl font-black text-emerald-600" id="stat-total-tests">0</div>
+                        </div>
+                        <div class="glass-card rounded-2xl p-5 space-y-2 border border-slate-200 dark:border-slate-800">
+                            <span class="text-xs text-slate-500 font-bold">Орташа балл</span>
+                            <div class="text-3xl font-black text-amber-500" id="stat-avg-score">0%</div>
+                        </div>
+                        <div class="glass-card rounded-2xl p-5 space-y-2 border border-slate-200 dark:border-slate-800">
+                            <span class="text-xs text-slate-500 font-bold">Қателер саны</span>
+                            <div class="text-3xl font-black text-rose-500" id="stat-total-mistakes">0</div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4 pt-4 border-t border-slate-200 dark:border-slate-800">
+                        <h4 class="font-bold text-sm">Кезеңдер бойынша дайындық деңгейі</h4>
+                        <div class="space-y-3">
+                            <div>
+                                <div class="flex justify-between text-xs font-bold mb-1">
+                                    <span>Ежелгі Қазақстан</span>
+                                    <span id="prog-ancient">85%</span>
+                                </div>
+                                <div class="w-full h-2.5 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
+                                    <div id="bar-ancient" class="h-full bg-emerald-500 rounded-full" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs font-bold mb-1">
+                                    <span>Орта ғасырлар</span>
+                                    <span id="prog-middle">70%</span>
+                                </div>
+                                <div class="w-full h-2.5 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
+                                    <div id="bar-middle" class="h-full bg-emerald-500 rounded-full" style="width: 70%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs font-bold mb-1">
+                                    <span>Жаңа заман</span>
+                                    <span id="prog-modern">60%</span>
+                                </div>
+                                <div class="w-full h-2.5 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
+                                    <div id="bar-modern" class="h-full bg-amber-500 rounded-full" style="width: 60%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs font-bold mb-1">
+                                    <span>Қазіргі заман</span>
+                                    <span id="prog-contemp">90%</span>
+                                </div>
+                                <div class="w-full h-2.5 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
+                                    <div id="bar-contemp" class="h-full bg-emerald-500 rounded-full" style="width: 90%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MISTAKE REVIEW / ERROR LOG -->
+                <div class="glass-card rounded-3xl p-8 space-y-6 border border-rose-500/30">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3 text-rose-600 dark:text-rose-400">
+                            <i class="fa-solid fa-triangle-exclamation text-2xl"></i>
+                            <div>
+                                <h3 class="text-xl font-bold">Қатемен жұмыс</h3>
+                                <p class="text-xs text-slate-500">Тест кезінде қате басқан сұрақтарыңызды қайталап шығыңыз.</p>
+                            </div>
+                        </div>
+                        <button onclick="clearMistakes()" class="px-3 py-1.5 rounded-xl bg-rose-500/10 text-rose-600 font-bold text-xs hover:bg-rose-500/20">
+                            Тізімді тазарту
+                        </button>
+                    </div>
+
+                    <div id="mistakes-list-container" class="space-y-4"></div>
+                </div>
+
+                <!-- ADMIN ONLY PANEL -->
+                <div id="admin-panel-section" class="hidden space-y-8">
+                    <!-- ТЕСТТЕР МЕН КЕЗЕҢДЕРДІ ӨШІРУ ПАНЕЛІ -->
+                    <div class="glass-card rounded-3xl p-8 space-y-6 border border-rose-500/30">
+                        <div class="flex items-center space-x-3 text-rose-600 dark:text-rose-400">
+                            <i class="fa-solid fa-trash-can text-2xl"></i>
+                            <div>
+                                <h3 class="text-xl font-bold">Кезеңдер мен Тесттерді Өшіру (Админ)</h3>
+                                <p class="text-xs text-slate-500">Қалаған кезеңнің ішінен қажетті тестті немесе тарауды өшіріңіз.</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4 pt-2">
+                            <div class="space-y-1">
+                                <label class="text-xs font-bold text-slate-500">Кезеңді таңдаңыз</label>
+                                <select id="admin-delete-stage-select" onchange="renderAdminSubstagesForDeletion()" class="w-full px-4 py-3 rounded-xl glass-card text-xs focus:outline-none focus:ring-2 focus:ring-rose-500 bg-transparent">
+                                    <option value="ancient">Ежелгі Қазақстан</option>
+                                    <option value="middle">Орта ғасырлар</option>
+                                    <option value="modern">Жаңа заман</option>
+                                    <option value="contemporary">Қазіргі заман</option>
+                                </select>
+                            </div>
+
+                            <div class="space-y-2">
+                                <label class="text-xs font-bold text-slate-500">Осы кезеңдегі тесттер (тараулар) тізімі:</label>
+                                <div id="admin-substages-delete-list" class="space-y-2 max-h-60 overflow-y-auto pr-2"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-3xl p-8 space-y-6 border border-amber-500/30">
+                        <div class="flex items-center space-x-3 text-amber-600 dark:text-amber-400">
+                            <i class="fa-solid fa-users-gear text-2xl"></i>
+                            <div>
+                                <h3 class="text-xl font-bold">Қолданушылар мен Аккаунттарды Басқару</h3>
+                                <p class="text-xs text-slate-500">Жаңа аккаунт ашу, қолданушылардың логин/парольдерін өзгерту.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-amber-500/5 border border-amber-500/20 rounded-2xl p-6 space-y-4">
+                            <h4 class="font-bold text-sm text-amber-700 dark:text-amber-300"><i class="fa-solid fa-user-plus mr-1"></i> Жаңа аккаунт ашу</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="space-y-1">
+                                    <label class="text-xs font-bold text-slate-500">Жаңа логин</label>
+                                    <input type="text" id="new-acc-username" placeholder="Мысалы: nurislam" class="w-full px-4 py-3 rounded-xl glass-card text-xs focus:outline-none focus:ring-2 focus:ring-amber-500">
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-xs font-bold text-slate-500">Жаңа құпия сөз (пароль)</label>
+                                    <input type="text" id="new-acc-password" placeholder="Мысалы: 98765" class="w-full px-4 py-3 rounded-xl glass-card text-xs focus:outline-none focus:ring-2 focus:ring-amber-500">
+                                </div>
+                            </div>
+                            <button onclick="adminCreateAccount()" class="px-6 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold text-xs shadow-md">
+                                Аккаунтты тіркеу
+                            </button>
+                        </div>
+
+                        <div class="space-y-3">
+                            <h4 class="font-bold text-sm">Тіркелген қолданушылар тізімі мен басқару</h4>
+                            <div id="admin-users-list" class="space-y-3"></div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-3xl p-8 space-y-6 border border-emerald-500/30">
+                        <div class="flex items-center space-x-3 text-emerald-600 dark:text-emerald-400">
+                            <i class="fa-solid fa-file-arrow-up text-2xl"></i>
+                            <div>
+                                <h3 class="text-xl font-bold">JSON арқылы сұрақ жүктеу</h3>
+                                <p class="text-xs text-slate-500">Тақырып аты, сипаттамасы және JSON арқылы тестке сұрақ қосу.</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4 pt-2">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="space-y-1">
+                                    <label class="text-xs font-bold text-slate-500">Тақырып аты (Мысалы: Мәдениет)</label>
+                                    <input type="text" id="admin-json-title" placeholder="Мысалы: Мәдениет" class="w-full px-4 py-3 rounded-xl glass-card text-xs focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-xs font-bold text-slate-500">Қай кезеңге тиісті?</label>
+                                    <select id="admin-json-stage" class="w-full px-4 py-3 rounded-xl glass-card text-xs focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-transparent">
+                                        <option value="ancient">Ежелгі Қазақстан</option>
+                                        <option value="middle" selected>Орта ғасырлар</option>
+                                        <option value="modern">Жаңа заман</option>
+                                        <option value="contemporary">Қазіргі заман</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="space-y-1">
+                                <label class="text-xs font-bold text-slate-500">Тақырып сипаттамасы</label>
+                                <input type="text" id="admin-json-desc" placeholder="Қысқаша сипаттамасы..." class="w-full px-4 py-3 rounded-xl glass-card text-xs focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                            </div>
+
+                            <div class="space-y-1">
+                                <div class="flex justify-between items-center">
+                                    <label class="text-xs font-bold text-slate-500">JSON сұрақтар форматы немесе файлы</label>
+                                    <button onclick="loadJsonTemplate()" class="text-xs text-emerald-600 font-bold hover:underline">Үлгіні жүктеу</button>
+                                </div>
+                                <textarea id="admin-json-textarea" rows="4" placeholder='[{"question": "Сұрақ?", "options": ["А", "В", "С", "D"], "answer": 0}]' class="w-full px-4 py-3 rounded-xl glass-card text-xs font-mono focus:outline-none focus:ring-2 focus:ring-emerald-500"></textarea>
+                            </div>
+
+                            <div class="flex items-center justify-between pt-2">
+                                <input type="file" id="json-file-input" accept=".json" class="text-xs file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-emerald-700 dark:file:bg-emerald-950 dark:file:text-emerald-300 hover:file:bg-emerald-100 cursor-pointer" onchange="handleFileUpload(event)">
+                                <button onclick="saveAdminJsonQuestion()" class="px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-extrabold shadow-lg shadow-emerald-500/20">
+                                    Тест базасына қосу
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- REGULAR USER NOTICE -->
+                <div id="user-notice-section" class="hidden glass-card rounded-3xl p-6 text-center space-y-2 border border-slate-200 dark:border-slate-800">
+                    <i class="fa-solid fa-circle-info text-emerald-600 text-xl"></i>
+                    <h4 class="font-bold text-sm">Қарапайым қолданушы аккаунты</h4>
+    
+                </div>
+            </div>
+
+            <!-- SETTINGS VIEW -->
+            <div id="view-settings" class="view-section hidden space-y-8 max-w-2xl mx-auto">
+                <div>
+                    <h2 class="text-3xl font-extrabold">Баптаулар (Settings)</h2>
+                    <p class="text-slate-500 dark:text-slate-400 text-xs">Платформаны өзіңізге ыңғайлы етіп баптаңыз.</p>
+                </div>
+
+                <div class="glass-card rounded-3xl p-8 space-y-6 shadow-2xl">
+                    <div class="flex items-center justify-between py-3 border-b border-slate-200 dark:border-slate-800">
+                        <div>
+                            <h4 class="font-bold text-sm">Қараңғы режим (Dark Mode)</h4>
+                            <p class="text-xs text-slate-500">Көзге ыңғайлы түнгі тақырып</p>
+                        </div>
+                        <button onclick="toggleDarkMode()" class="w-12 h-6 rounded-full bg-emerald-600 relative transition-colors p-1">
+                            <div id="settings-toggle-circle" class="w-4 h-4 rounded-full bg-white transition-transform transform translate-x-6"></div>
+                        </button>
+                    </div>
+
+                    <!-- TEST FEEDBACK MODE SETTING -->
+                    <div class="flex items-center justify-between py-3 border-b border-slate-200 dark:border-slate-800">
+                        <div>
+                            <h4 class="font-bold text-sm">Тест жауап көрсету режимі</h4>
+                            <p class="text-xs text-slate-500">Жауапты бірден немесе соңында көру</p>
+                        </div>
+                        <select id="setting-feedback-mode" onchange="saveSetting('feedback_mode', this.value)" class="px-4 py-2 rounded-xl glass-card text-xs font-bold bg-transparent">
+                            <option value="classic">Аяқталған соң көру (Классикалық)</option>
+                            <option value="instant">Бірден жауапты көру (Лезде)</option>
+                        </select>
+                    </div>
+
+                    <!-- QUESTION COUNT SETTING -->
+                    <div class="flex items-center justify-between py-3 border-b border-slate-200 dark:border-slate-800">
+                        <div>
+                            <h4 class="font-bold text-sm">Тест сұрақтарының саны</h4>
+                            <p class="text-xs text-slate-500">Қанша сұрақ тапсырғыңыз келеді?</p>
+                        </div>
+                        <select id="setting-question-count" onchange="saveSetting('question_count', this.value)" class="px-4 py-2 rounded-xl glass-card text-xs font-bold bg-transparent">
+                            <option value="5">5 сұрақ</option>
+                            <option value="10">10 сұрақ</option>
+                            <option value="20" selected>20 сұрақ (ҰБТ)</option>
+                            <option value="40">40 сұрақ</option>
+                            <option value="60">60 сұрақ</option>
+                        </select>
+                    </div>
+
+                    <div class="flex items-center justify-between py-3 border-b border-slate-200 dark:border-slate-800">
+                        <div>
+                            <h4 class="font-bold text-sm">Тест таймері</h4>
+                            <p class="text-xs text-slate-500">Уақытты бақылау</p>
+                        </div>
+                        <input type="checkbox" id="setting-timer" checked class="w-5 h-5 accent-emerald-600 rounded cursor-pointer">
+                    </div>
+
+                    <div class="flex items-center justify-between py-3">
+                        <div>
+                            <h4 class="font-bold text-sm">Шрифт өлшемі</h4>
+                            <p class="text-xs text-slate-500">Мәтін көлемін өзгерту</p>
+                        </div>
+                        <select id="setting-font-size" onchange="changeFontSize(this.value)" class="px-4 py-2 rounded-xl glass-card text-xs font-bold bg-transparent">
+                            <option value="normal">Қалыпты</option>
+                            <option value="large">Үлкен</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <footer class="glass-card border-t border-slate-200 dark:border-slate-800 py-6 px-4 text-center text-xs text-slate-500 dark:text-slate-400">
+            <p>&copy; 2026 Mura.app. Қазақстан тарихынан ҰБТ-ға дайындық платформасы.</p>
+        </footer>
+    </div>
+
+    <script>
+        const motivationalQuotes = [
+            { quote: "Өткенін білмеген, болашағын болжай алмайды.", author: "Қазақ мақалы" },
+            { quote: "Тарих — халықтың өткен күнгі өмірінің айнасы.", author: "М. Жұмабаев" },
+            { quote: "Ерлік білекте емес, жүректе.", author: "Бауыржан Момышұлы" }
+        ];
+
+        function getRegisteredUsers() {
+
+            const stored = localStorage.getItem('tarih_users_db');
+            if (!stored) {
+                localStorage.setItem('tarih_users_db', JSON.stringify(defaultUsers));
+                return defaultUsers;
+            }
+            return JSON.parse(stored);
+        }
+
+        const baseHistoricalStages = {
+            ancient: {
+                title: "Ежелгі Қазақстан тарихы",
+                desc: "Тас, қола дәуірлері, сақтар, ғұндар мен үйсіндер тарихы.",
+                icon: "fa-landmark-dome",
+                substages: [
+                    { id: "stone_bronze", title: "Тас және қола дәуірі", desc: "Палеолит, неолит және андронов мәдениеті." },
+                    { id: "saks", title: "Сақ тайпалары", desc: "Томирис, сақтардың тұрмысы мен әскери өнері." },
+                    { id: "huns_uysun", title: "Ғұндар мен үйсіндер", desc: "Mөде қаған, Ұлы Жібек жолының басталуы." }
+                ]
+            },
+            middle: {
+                title: "Орта ғасырлардағы Қазақстан",
+                desc: "Түрік қағанаттары, моңғол шапқыншылығы және Қазақ хандығы.",
+                icon: "fa-chess-rook",
+                substages: [
+                    { id: "turkic_khaganate", title: "Түрік қағанаттары", desc: "Күлтегін, Білге қаған, түркі жазуы." },
+                    { id: "mongol_empire", title: "Моңғол империясы мен мемлекеттер", desc: "Шыңғыс хан жорықтары, Ак Орда, Моғолстан." },
+                    { id: "kazakh_khanate", title: "Қазақ хандығының құрылуы", desc: "Керей мен Жәнібек хандар, Қасым хан." }
+                ]
+            },
+            modern: {
+                title: "Жаңа заман",
+                desc: "Қазақ жүздерінің Ресейге қосылуы, ұлт-азаттық көтерілістер.",
+                icon: "fa-scroll",
+                substages: [
+                    { id: "annexation", title: "Ресей империясына қосылу", desc: "Кіші жүздің қосылуы, Әбілқайыр хан." },
+                    { id: "uprisings", title: "Ұлт-азаттық көтерілістер", desc: "Сырым Датұлы, Кенесары Қасымұлы." },
+                    { id: "jadidism", title: "Жәдидшілік және Алаш қозғалысы", desc: "Алаш автономиясы, Алашорда үкіметі." }
+                ]
+            },
+            contemporary: {
+                title: "Қазіргі заман",
+                desc: "Кеңес дәуірі, Желтоқсан көтерілісі және Тәуелсіз Қазақстан.",
+                icon: "fa-globe",
+                substages: [
+                    { id: "soviet_era", title: "Кеңес үкіметі және тартыстар", desc: "Ұжымдастыру, ашаршылық, Ұлы Отан соғысы." },
+                    { id: "december_1986", title: "1986 жылғы Желтоқсан оқиғасы", desc: "Қайрат Рысқұлбұлы, Ербол Сыпатаев." },
+                    { id: "independence", title: "Тәуелсіз Қазақстан", desc: "1991 жылғы Тәуелсіздік декларациясы, Ата заң." }
+                ]
+            }
+        };
+
+        function getHistoricalStages() {
+            const stored = localStorage.getItem('tarih_stages_db');
+            if (!stored) {
+                localStorage.setItem('tarih_stages_db', JSON.stringify(baseHistoricalStages));
+                return baseHistoricalStages;
+            }
+            return JSON.parse(stored);
+        }
+
+        const baseQuestionDatabase = {
+            "stone_bronze": {
+                questions: [
+                    { question: "Қазақстан аумағындағы ең көне палеолит тұрағы?", options: ["Бөріқазғы, Шақпақата", "Беғазы-Дәндібай", "Шілікті", "Берел"], answer: 0 },
+                    { question: "Андронов мәдениеті қай кезеңге жатады?", options: ["Тас дәуірі", "Қола дәуірі", "Темір дәуірі", "Орта ғасырлар"], answer: 1 },
+                    { question: "Неолит төңкерісі нені білдіреді?", options: ["Темірді өндіру", "Өндіруші шаруашылыққа көшу", "Мал бағудан бас тарту", "Жазудың пайда болуы"], answer: 1 }
+                ]
+            },
+            "kazakh_khanate": {
+                questions: [
+                    { question: "Қазақ хандығының құрылған жылдары?", options: ["1465-1466 жылдар", "1450 жыл", "1500 жыл", "1510 жыл"], answer: 0 },
+                    { question: "Қазақ хандығының алғашқы хандары?", options: ["Керей мен Жәнібек", "Қасым мен Хақназар", "Әбілқайыр мен Тәуке", "Абылай мен Кенесары"], answer: 0 }
+                ]
+            }
+        };
+
+        function getQuestionDatabase() {
+            const stored = localStorage.getItem('tarih_questions_db');
+            if (!stored) {
+                localStorage.setItem('tarih_questions_db', JSON.stringify(baseQuestionDatabase));
+                return baseQuestionDatabase;
+            }
+            return JSON.parse(stored);
+        }
+
+        function getUserSettings() {
+            const defaultSettings = { feedback_mode: 'classic', question_count: '20' };
+            const stored = localStorage.getItem('tarih_user_settings');
+            return stored ? JSON.parse(stored) : defaultSettings;
+        }
+
+        function saveSetting(key, val) {
+            let settings = getUserSettings();
+            settings[key] = val;
+            localStorage.setItem('tarih_user_settings', JSON.stringify(settings));
+        }
+
+        function loadSettingsToUI() {
+            const settings = getUserSettings();
+            document.getElementById('setting-feedback-mode').value = settings.feedback_mode;
+            document.getElementById('setting-question-count').value = settings.question_count;
+        }
+
+        function getUserStats() {
+            if (!currentUser) return { totalTests: 0, avgScore: 0, mistakesCount: 0 };
+            const key = `tarih_stats_${currentUser.username}`;
+            const stored = localStorage.getItem(key);
+            if (!stored) {
+                const defaultStats = { totalTests: 3, avgScore: 78, mistakesCount: 4 };
+                localStorage.setItem(key, JSON.stringify(defaultStats));
+                return defaultStats;
+            }
+            return JSON.parse(stored);
+        }
+
+        function saveUserStats(newTestAdded, scorePercent, hasMistakes) {
+            if (!currentUser) return;
+            let stats = getUserStats();
+            if (newTestAdded) {
+                stats.totalTests += 1;
+                stats.avgScore = Math.round(((stats.avgScore * (stats.totalTests - 1)) + scorePercent) / stats.totalTests);
+            }
+            if (hasMistakes) {
+                stats.mistakesCount += 1;
+            }
+            localStorage.setItem(`tarih_stats_${currentUser.username}`, JSON.stringify(stats));
+        }
+
+        function getUserMistakes() {
+            if (!currentUser) return [];
+            const key = `tarih_mistakes_${currentUser.username}`;
+            const stored = localStorage.getItem(key);
+            if (!stored) {
+                const sampleMistakes = [
+                    { question: "Андронов мәдениеті қай кезеңге жатады?", userAnswer: "Тас дәуірі", correctAnswer: "Қола дәуірі", topic: "Тас және қола дәуірі" }
+                ];
+                localStorage.setItem(key, JSON.stringify(sampleMistakes));
+                return sampleMistakes;
+            }
+            return JSON.parse(stored);
+        }
+
+        function saveUserMistake(questionObj, userOptIdx) {
+            if (!currentUser) return;
+            const key = `tarih_mistakes_${currentUser.username}`;
+            let mistakes = getUserMistakes();
+            
+            const userGivenText = (userOptIdx !== undefined && userOptIdx !== null && questionObj.options[userOptIdx] !== undefined) 
+                ? questionObj.options[userOptIdx] 
+                : "Жауап берілмеді";
+
+            const correctText = (questionObj.answer !== undefined && questionObj.options[questionObj.answer] !== undefined)
+                ? questionObj.options[questionObj.answer]
+                : "Белгіленбеген";
+
+            const mistakeItem = {
+                question: questionObj.question,
+                userAnswer: userGivenText,
+                correctAnswer: correctText,
+                topic: document.getElementById('activity-title').innerText
+            };
+            
+            if (!mistakes.some(m => m.question === mistakeItem.question)) {
+                mistakes.push(mistakeItem);
+                localStorage.setItem(key, JSON.stringify(mistakes));
+            }
+        }
+
+        function clearMistakes() {
+            if (!currentUser) return;
+            localStorage.setItem(`tarih_mistakes_${currentUser.username}`, JSON.stringify([]));
+            renderMistakesList();
+            renderProfileView();
+        }
+
+        let currentUser = null;
+        let activeStageKey = null;
+        let activeSubstageKey = null;
+        let activeQuestions = [];
+        let currentQuestionIndex = 0;
+        let userAnswers = {};
+        let testTimerInterval = null;
+        let secondsElapsed = 0;
+
+        window.onload = function() {
+            loadTheme();
+            loadSettingsToUI();
+            checkAuthOnStartup();
+            renderHomeQuote();
+            renderMainStages();
+        };
+
+        function checkAuthOnStartup() {
+            const savedUser = localStorage.getItem('tarih_current_user');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                document.getElementById('full-auth-screen').classList.add('hidden');
+                document.getElementById('main-app-wrapper').classList.remove('hidden');
+                document.getElementById('main-app-wrapper').classList.add('flex');
+                updateAuthUI();
+                updateHomeGreeting();
+            } else {
+                document.getElementById('full-auth-screen').classList.remove('hidden');
+                document.getElementById('main-app-wrapper').classList.add('hidden');
+            }
+        }
+
+        function handleLogin() {
+            const username = document.getElementById('login-username').value.trim();
+            const password = document.getElementById('login-password').value.trim();
+            const errorMsg = document.getElementById('login-error-msg');
+
+            const users = getRegisteredUsers();
+            const foundUser = users.find(u => u.username.toLowerCase() === username.toLowerCase());
+
+            if (!foundUser) {
+                errorMsg.innerText = "Мұндай логин табылмады!";
+                errorMsg.classList.remove('hidden');
+                return;
+            }
+
+            if (foundUser.password !== password) {
+                errorMsg.innerText = "Құпия сөз (пароль) қате!";
+                errorMsg.classList.remove('hidden');
+                return;
+            }
+
+            currentUser = foundUser;
+            localStorage.setItem('tarih_current_user', JSON.stringify(currentUser));
+            document.getElementById('full-auth-screen').classList.add('hidden');
+            document.getElementById('main-app-wrapper').classList.remove('hidden');
+            document.getElementById('main-app-wrapper').classList.add('flex');
+            updateAuthUI();
+            updateHomeGreeting();
+            navigateTo('home');
+        }
+
+        function updateHomeGreeting() {
+            if (currentUser) {
+                document.getElementById('home-greeting-title').innerText = `Салем, ${currentUser.username}! 🚀`;
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('tarih_current_user');
+            currentUser = null;
+            document.getElementById('login-username').value = '';
+            document.getElementById('login-password').value = '';
+            document.getElementById('login-error-msg').classList.add('hidden');
+            document.getElementById('full-auth-screen').classList.remove('hidden');
+            document.getElementById('main-app-wrapper').classList.add('hidden');
+        }
+
+        function updateAuthUI() {
+            const container = document.getElementById('auth-status-container');
+            if (currentUser) {
+                container.innerHTML = `
+                    <div onclick="navigateTo('profile')" class="flex items-center space-x-2 cursor-pointer glass-card px-3.5 py-2 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-800 transition-all border border-slate-300/40 dark:border-slate-800">
+                        <div class="w-7 h-7 rounded-lg bg-emerald-600 text-white font-bold flex items-center justify-center text-xs">
+                            ${currentUser.username.charAt(0).toUpperCase()}
+                        </div>
+                        <span class="text-xs font-bold hidden sm:inline">${currentUser.username}</span>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = '';
+            }
+        }
+
+        function navigateTo(viewId) {
+            document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`view-${viewId}`).classList.remove('hidden');
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('text-emerald-600', 'bg-white', 'dark:bg-slate-800', 'shadow-sm');
+                btn.classList.add('text-slate-600', 'dark:text-slate-300');
+            });
+
+            const activeBtn = document.getElementById(`nav-${viewId}`);
+            if (activeBtn) {
+                activeBtn.classList.add('text-emerald-600', 'bg-white', 'dark:bg-slate-800', 'shadow-sm');
+                activeBtn.classList.remove('text-slate-600', 'dark:text-slate-300');
+            }
+
+            if (viewId === 'profile') {
+                renderProfileView();
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function renderMainStages() {
+            const grid = document.getElementById('main-stages-grid');
+            grid.innerHTML = '';
+
+            const stagesData = getHistoricalStages();
+            for (const [key, stage] of Object.entries(stagesData)) {
+                grid.innerHTML += `
+                    <div onclick="selectMainStage('${key}')" class="glass-card rounded-3xl p-6 space-y-4 cursor-pointer hover:shadow-2xl hover:scale-[1.02] transition-all border border-slate-200 dark:border-slate-800 flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-2xl shadow-inner">
+                                <i class="fa-solid ${stage.icon}"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">${stage.title}</h3>
+                            <p class="text-slate-600 dark:text-slate-400 text-xs leading-relaxed">${stage.desc}</p>
+                        </div>
+                        <div class="flex items-center text-xs font-bold text-emerald-600 dark:text-emerald-400 pt-4 border-t border-slate-200 dark:border-slate-800">
+                            <span>Тарауларды ашу</span> <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function selectMainStage(stageKey) {
+            activeStageKey = stageKey;
+            const stagesData = getHistoricalStages();
+            const stage = stagesData[stageKey];
+            
+            document.getElementById('selected-stage-title').innerText = stage.title;
+            const subGrid = document.getElementById('substages-grid');
+            subGrid.innerHTML = '';
+
+            stage.substages.forEach(sub => {
+                subGrid.innerHTML += `
+                    <div onclick="startSubstageActivity('${sub.id}', '${sub.title}')" class="glass-card rounded-2xl p-6 space-y-3 cursor-pointer hover:shadow-xl transition-all border border-slate-200 dark:border-slate-800 flex flex-col justify-between">
+                        <div class="space-y-2">
+                            <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400">Тарау</span>
+                            <h4 class="text-lg font-bold">${sub.title}</h4>
+                            <p class="text-xs text-slate-500 dark:text-slate-400">${sub.desc}</p>
+                        </div>
+                        <div class="flex items-center space-x-2 pt-4 border-t border-slate-200 dark:border-slate-800 text-xs font-bold text-emerald-600">
+                            <span><i class="fa-solid fa-play mr-1"></i> Тестті бастау</span>
+                        </div>
+                    </div>
+                `;
+            });
+
+            document.getElementById('main-stages-grid').classList.add('hidden');
+            document.getElementById('substages-container').classList.remove('hidden');
+        }
+
+        function closeSubStages() {
+            activeStageKey = null;
+            document.getElementById('substages-container').classList.add('hidden');
+            document.getElementById('main-stages-grid').classList.remove('hidden');
+        }
+
+        function startSubstageActivity(subId, subTitle) {
+            activeSubstageKey = subId;
+            document.getElementById('activity-title').innerText = subTitle;
+            const stagesData = getHistoricalStages();
+            document.getElementById('activity-topic-badge').innerText = stagesData[activeStageKey].title;
+
+            const qDb = getQuestionDatabase();
+            const data = qDb[subId] || {
+                questions: [
+                    { question: `${subTitle} тақырыбы бойынша тест сұрағы 1:`, options: ["Дұрыс жауап", "Қате 1", "Қате 2", "Қате 3"], answer: 0 },
+                    { question: `${subTitle} тақырыбы бойынша тест сұрағы 2:`, options: ["Қате 1", "Дұрыс жауап", "Қате 2", "Қате 3"], answer: 1 }
+                ]
+            };
+
+            const userSettings = getUserSettings();
+            let desiredCount = parseInt(userSettings.question_count) || 20;
+            let rawQuestions = [...data.questions];
+            
+            let fullQuestions = [];
+            while (fullQuestions.length < desiredCount && rawQuestions.length > 0) {
+                fullQuestions = fullQuestions.concat(rawQuestions);
+            }
+            activeQuestions = fullQuestions.slice(0, desiredCount);
+
+            currentQuestionIndex = 0;
+            userAnswers = {};
+
+            navigateTo('activity');
+            initTest();
+        }
+
+        function exitActivity() {
+            navigateTo('stages');
+        }
+
+        function initTest() {
+            currentQuestionIndex = 0;
+            userAnswers = {};
+            startTimer();
+            renderCurrentQuestion();
+        }
+
+        function startTimer() {
+            clearInterval(testTimerInterval);
+            secondsElapsed = 0;
+            testTimerInterval = setInterval(() => {
+                secondsElapsed++;
+                const mins = Math.floor(secondsElapsed / 60).toString().padStart(2, '0');
+                const secs = (secondsElapsed % 60).toString().padStart(2, '0');
+                const timerEl = document.getElementById('timer-val');
+                if (timerEl) timerEl.innerText = `${mins}:${secs}`;
+            }, 1000);
+        }
+
+        function renderCurrentQuestion() {
+            const q = activeQuestions[currentQuestionIndex];
+            document.getElementById('test-progress-text').innerText = `Сұрақ ${currentQuestionIndex + 1} / ${activeQuestions.length}`;
+            document.getElementById('question-text').innerText = q.question;
+
+            const optsContainer = document.getElementById('options-container');
+            optsContainer.innerHTML = '';
+            
+            const feedbackBox = document.getElementById('instant-feedback-box');
+            feedbackBox.classList.add('hidden');
+
+            const userSettings = getUserSettings();
+            const isInstantMode = userSettings.feedback_mode === 'instant';
+            const answeredIdx = userAnswers[currentQuestionIndex];
+
+            q.options.forEach((opt, idx) => {
+                let btnStyle = 'border-slate-200 dark:border-slate-800 hover:border-emerald-500/50';
+                let indicatorBg = 'bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300';
+
+                if (answeredIdx === idx) {
+                    if (isInstantMode) {
+                        if (idx === q.answer) {
+                            btnStyle = 'border-emerald-500 bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 font-bold';
+                            indicatorBg = 'bg-emerald-600 text-white';
+                        } else {
+                            btnStyle = 'border-rose-500 bg-rose-500/15 text-rose-700 dark:text-rose-300 font-bold';
+                            indicatorBg = 'bg-rose-600 text-white';
+                        }
+                    } else {
+                        btnStyle = 'border-emerald-500 bg-emerald-500/10 font-bold';
+                        indicatorBg = 'bg-emerald-600 text-white';
+                    }
+                } else if (isInstantMode && answeredIdx !== undefined && idx === q.answer) {
+                    btnStyle = 'border-emerald-500 bg-emerald-500/10 font-bold';
+                    indicatorBg = 'bg-emerald-600 text-white';
+                }
+
+                optsContainer.innerHTML += `
+                    <div onclick="selectOption(${idx})" class="p-4 rounded-2xl glass-card cursor-pointer border transition-all flex items-center space-x-3 ${btnStyle} ${isInstantMode && answeredIdx !== undefined ? 'pointer-events-none' : ''}">
+                        <div class="w-6 h-6 rounded-lg ${indicatorBg} flex items-center justify-center text-xs font-bold">
+                            ${['A','B','C','D'][idx]}
+                        </div>
+                        <span class="text-xs md:text-sm">${opt}</span>
+                    </div>
+                `;
+            });
+
+            if (isInstantMode && answeredIdx !== undefined) {
+                feedbackBox.classList.remove('hidden');
+                if (answeredIdx === q.answer) {
+                    feedbackBox.className = "p-4 rounded-2xl font-bold text-xs bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30";
+                    feedbackBox.innerHTML = `<i class="fa-solid fa-circle-check mr-1.5"></i> Дұрыс! Керемет жауап.`;
+                } else {
+                    feedbackBox.className = "p-4 rounded-2xl font-bold text-xs bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/30";
+                    feedbackBox.innerHTML = `<i class="fa-solid fa-circle-xmark mr-1.5"></i> Қате! Дұрыс жауап: ${q.options[q.answer]}`;
+                }
+            }
+
+            document.getElementById('btn-prev').disabled = currentQuestionIndex === 0;
+            const nextBtn = document.getElementById('btn-next');
+            if (currentQuestionIndex === activeQuestions.length - 1) {
+                nextBtn.innerHTML = `Аяқтау <i class="fa-solid fa-check ml-2"></i>`;
+            } else {
+                nextBtn.innerHTML = `Алға <i class="fa-solid fa-arrow-right ml-2"></i>`;
+            }
+        }
+
+        function selectOption(idx) {
+            if (userAnswers[currentQuestionIndex] !== undefined) {
+                const userSettings = getUserSettings();
+                if (userSettings.feedback_mode === 'instant') return;
+            }
+            userAnswers[currentQuestionIndex] = idx;
+            renderCurrentQuestion();
+        }
+
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                renderCurrentQuestion();
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < activeQuestions.length - 1) {
+                currentQuestionIndex++;
+                renderCurrentQuestion();
+            } else {
+                finishTest();
+            }
+        }
+
+        function finishTest() {
+            clearInterval(testTimerInterval);
+            let correctCount = 0;
+            let mistakesListHtml = '';
+
+            activeQuestions.forEach((q, idx) => {
+                const userAns = userAnswers[idx];
+                if (userAns !== undefined && userAns === q.answer) {
+                    correctCount++;
+                } else {
+                    saveUserMistake(q, userAns);
+                    const userGivenText = (userAns !== undefined && userAns !== null && q.options[userAns] !== undefined) 
+                        ? q.options[userAns] 
+                        : "Жауап берілмеді";
+
+                    const correctText = (q.answer !== undefined && q.options[q.answer] !== undefined)
+                        ? q.options[q.answer]
+                        : "Белгіленбеген";
+
+                    mistakesListHtml += `
+                        <div class="p-3.5 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs space-y-1">
+                            <p class="font-bold">Сұрақ #${idx + 1}: ${q.question}</p>
+                            <p class="text-rose-500 font-semibold">Сіздің жауап: ${userGivenText}</p>
+                            <p class="text-emerald-500 font-semibold">Дұрыс жауап: ${correctText}</p>
+                        </div>
+                    `;
+                }
+            });
+
+            const scorePercent = Math.round((correctCount / activeQuestions.length) * 100);
+            saveUserStats(true, scorePercent, correctCount < activeQuestions.length);
+
+            document.getElementById('test-runner-container').classList.add('hidden');
+            document.getElementById('test-results-container').classList.remove('hidden');
+            document.getElementById('final-score-val').innerText = `${correctCount} / ${activeQuestions.length} (${scorePercent}%)`;
+
+            const mistakesContainer = document.getElementById('result-mistakes-list');
+            if (mistakesListHtml === '') {
+                mistakesContainer.innerHTML = `<p class="text-xs text-emerald-500 font-bold italic">Қате жіберілмеді! Сіз барлық сұраққа дұрыс жауап бердіңіз! 🌟</p>`;
+            } else {
+                mistakesContainer.innerHTML = mistakesListHtml;
+            }
+        }
+
+        function restartTest() {
+            initTest();
+            document.getElementById('test-runner-container').classList.remove('hidden');
+            document.getElementById('test-results-container').classList.add('hidden');
+        }
+
+        function renderProfileView() {
+            if (!currentUser) return;
+            document.getElementById('profile-name').innerText = currentUser.username;
+            document.getElementById('profile-email').innerText = currentUser.email;
+            document.getElementById('profile-avatar-initials').innerText = currentUser.username.charAt(0).toUpperCase();
+
+            const roleBadge = document.getElementById('profile-role-badge');
+            const adminPanel = document.getElementById('admin-panel-section');
+            const userNotice = document.getElementById('user-notice-section');
+
+            if (currentUser.username === 'sayanabdilla') {
+                roleBadge.innerText = 'Администратор';
+                roleBadge.className = 'px-3 py-1 rounded-full text-[10px] font-bold bg-amber-100 dark:bg-amber-950 text-amber-600 dark:text-amber-400';
+                adminPanel.classList.remove('hidden');
+                userNotice.classList.add('hidden');
+                renderAdminUsersList();
+                renderAdminSubstagesForDeletion();
+            } else {
+                roleBadge.innerText = 'Қарапайым қолданушы';
+                roleBadge.className = 'px-3 py-1 rounded-full text-[10px] font-bold bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400';
+                adminPanel.classList.add('hidden');
+                userNotice.classList.remove('hidden');
+            }
+
+            renderStatsAndMistakes();
+        }
+
+        function renderStatsAndMistakes() {
+            const stats = getUserStats();
+            document.getElementById('stat-total-tests').innerText = stats.totalTests;
+            document.getElementById('stat-avg-score').innerText = `${stats.avgScore}%`;
+            document.getElementById('stat-total-mistakes').innerText = stats.mistakesCount;
+
+            renderMistakesList();
+        }
+
+        function renderMistakesList() {
+            const mistakes = getUserMistakes();
+            const container = document.getElementById('mistakes-list-container');
+            container.innerHTML = '';
+
+            if (mistakes.length === 0) {
+                container.innerHTML = `<p class="text-xs text-slate-500 italic text-center py-4">Әзірге қате жіберілген сұрақтар жоқ. Тамаша нәтиже! 🎉</p>`;
+                return;
+            }
+
+            mistakes.forEach((m, i) => {
+                container.innerHTML += `
+                    <div class="glass-card rounded-2xl p-4 space-y-2 border border-slate-200 dark:border-slate-800">
+                        <div class="flex items-center justify-between text-[10px] text-slate-500">
+                            <span class="font-bold text-emerald-600">${m.topic}</span>
+                            <span>#${i + 1} қате</span>
+                        </div>
+                        <h5 class="font-bold text-sm">${m.question}</h5>
+                        <div class="flex flex-wrap gap-3 text-xs pt-1">
+                            <span class="px-2.5 py-1 rounded-lg bg-rose-500/10 text-rose-600 border border-rose-500/20 font-medium">Сіздің жауап: ${m.userAnswer}</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-600 border border-emerald-500/20 font-medium">Дұрыс жауап: ${m.correctAnswer}</span>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function renderAdminUsersList() {
+            const users = getRegisteredUsers();
+            const listContainer = document.getElementById('admin-users-list');
+            listContainer.innerHTML = '';
+
+            users.forEach((u, index) => {
+                listContainer.innerHTML += `
+                    <div class="glass-card rounded-2xl p-4 flex flex-col md:flex-row md:items-center justify-between gap-3 border border-slate-200 dark:border-slate-800">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-9 h-9 rounded-xl bg-slate-200 dark:bg-slate-800 flex items-center justify-center font-bold text-xs">
+                                ${u.username.charAt(0).toUpperCase()}
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-xs">${u.username} <span class="text-[10px] px-2 py-0.5 rounded-full ${u.role === 'admin' ? 'bg-amber-500/20 text-amber-600' : 'bg-emerald-500/20 text-emerald-600'}">${u.role}</span></h5>
+                                <p class="text-[10px] text-slate-400">Паролі: <code class="bg-black/20 dark:bg-black/40 px-1 py-0.5 rounded">${u.password}</code></p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <input type="text" id="edit-pass-${index}" value="${u.password}" placeholder="Жаңа пароль" class="px-3 py-1.5 rounded-xl glass-card text-xs w-28 focus:outline-none focus:ring-2 focus:ring-amber-500">
+                            <button onclick="adminUpdateUserPassword('${u.username}', ${index})" class="px-3 py-1.5 rounded-xl bg-emerald-600 text-white font-bold text-xs hover:bg-emerald-700">Сақтау</button>
+                            ${u.username !== 'sayanabdilla' ? `<button onclick="adminDeleteUser('${u.username}')" class="px-3 py-1.5 rounded-xl bg-rose-500/10 text-rose-600 font-bold text-xs hover:bg-rose-500/20"><i class="fa-solid fa-trash"></i></button>` : ''}
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function renderAdminSubstagesForDeletion() {
+            const stageKey = document.getElementById('admin-delete-stage-select').value;
+            const stagesDb = getHistoricalStages();
+            const stage = stagesDb[stageKey];
+            const listEl = document.getElementById('admin-substages-delete-list');
+            listEl.innerHTML = '';
+
+            if (!stage || !stage.substages || stage.substages.length === 0) {
+                listEl.innerHTML = `<p class="text-xs text-slate-500 italic">Бұл кезеңде тараулар жоқ.</p>`;
+                return;
+            }
+
+            stage.substages.forEach((sub) => {
+                listEl.innerHTML += `
+                    <div class="p-3 rounded-xl glass-card flex items-center justify-between border border-slate-200 dark:border-slate-800">
+                        <div>
+                            <h6 class="font-bold text-xs">${sub.title}</h6>
+                            <p class="text-[10px] text-slate-400">${sub.desc}</p>
+                        </div>
+                        <button onclick="adminDeleteSubstage('${stageKey}', '${sub.id}')" class="px-3 py-1.5 rounded-xl bg-rose-500/10 text-rose-600 hover:bg-rose-500/20 text-xs font-bold transition-all flex items-center space-x-1">
+                            <i class="fa-solid fa-trash"></i> <span>Өшіру</span>
+                        </button>
+                    </div>
+                `;
+            });
+        }
+
+        function adminDeleteSubstage(stageKey, subId) {
+            if (confirm("Бұл тестті / кезеңді өшіруге сенімдісіз бе?")) {
+                let stagesDb = getHistoricalStages();
+                if (stagesDb[stageKey] && stagesDb[stageKey].substages) {
+                    stagesDb[stageKey].substages = stagesDb[stageKey].substages.filter(s => s.id !== subId);
+                    localStorage.setItem('tarih_stages_db', JSON.stringify(stagesDb));
+                    
+                    let qDb = getQuestionDatabase();
+                    if (qDb[subId]) {
+                        delete qDb[subId];
+                        localStorage.setItem('tarih_questions_db', JSON.stringify(qDb));
+                    }
+
+                    alert("Тест (тарау) сәтті өшірілді!");
+                    renderAdminSubstagesForDeletion();
+                    renderMainStages();
+                }
+            }
+        }
+
+        function adminCreateAccount() {
+            const username = document.getElementById('new-acc-username').value.trim();
+            const password = document.getElementById('new-acc-password').value.trim();
+
+            if (!username || !password) {
+                alert('Логин мен құпия сөзді толық енгізіңіз!');
+                return;
+            }
+
+            let users = getRegisteredUsers();
+            if (users.some(u => u.username.toLowerCase() === username.toLowerCase())) {
+                alert('Мұндай логин жүйеде бар!');
+                return;
+            }
+
+            users.push({ username: username, password: password, role: 'user', email: username + '@tarihubt.kz' });
+            localStorage.setItem('tarih_users_db', JSON.stringify(users));
+
+            document.getElementById('new-acc-username').value = '';
+            document.getElementById('new-acc-password').value = '';
+            alert('Жаңа аккаунт сәтті ашылды және сақталды!');
+            renderAdminUsersList();
+        }
+
+        function adminUpdateUserPassword(username, index) {
+            const newPass = document.getElementById(`edit-pass-${index}`).value.trim();
+            if (!newPass) {
+                alert('Пароль бос болмауы керек!');
+                return;
+            }
+
+            let users = getRegisteredUsers();
+            const userObj = users.find(u => u.username === username);
+            if (userObj) {
+                userObj.password = newPass;
+                localStorage.setItem('tarih_users_db', JSON.stringify(users));
+                alert(`${username} қолданушысының паролі жаңартылды!`);
+                renderAdminUsersList();
+            }
+        }
+
+        function adminDeleteUser(username) {
+            if (confirm(`${username} аккаунтын жоюға сенімдісіз бе?`)) {
+                let users = getRegisteredUsers();
+                users = users.filter(u => u.username !== username);
+                localStorage.setItem('tarih_users_db', JSON.stringify(users));
+                renderAdminUsersList();
+            }
+        }
+
+        function loadJsonTemplate() {
+            const sample = [
+                {
+                    "question": "Абылай ханның шын аты кім?",
+                    "options": ["Әбілмансұр", "Қасым", "Бұрындық", "Тәуке"],
+                    "answer": 0
+                }
+            ];
+            document.getElementById('admin-json-textarea').value = JSON.stringify(sample, null, 2);
+        }
+
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('admin-json-textarea').value = e.target.result;
+            };
+            reader.readAsText(file);
+        }
+
+        function saveAdminJsonQuestion() {
+            if (!currentUser || currentUser.username !== 'sayanabdilla') {
+                alert('Қате: Бұл әрекет тек админге рұқсат етілген!');
+                return;
+            }
+
+            const title = document.getElementById('admin-json-title').value.trim();
+            const stage = document.getElementById('admin-json-stage').value;
+            const desc = document.getElementById('admin-json-desc').value.trim();
+            const jsonText = document.getElementById('admin-json-textarea').value.trim();
+
+            if (!title || !jsonText) {
+                alert('Тақырып атауы мен JSON сұрақтарын толтырыңыз!');
+                return;
+            }
+
+            try {
+                const parsedQuestions = JSON.parse(jsonText);
+                const customKey = 'custom_' + Date.now();
+
+                let qDb = getQuestionDatabase();
+                qDb[customKey] = {
+                    questions: parsedQuestions
+                };
+                localStorage.setItem('tarih_questions_db', JSON.stringify(qDb));
+
+                let stagesDb = getHistoricalStages();
+                stagesDb[stage].substages.push({
+                    id: customKey,
+                    title: title,
+                    desc: desc || "Жаңа жүктелген тарау (Тест)"
+                });
+                localStorage.setItem('tarih_stages_db', JSON.stringify(stagesDb));
+
+                alert('JSON сұрақтары сәтті сақталды және тест базасына қосылды!');
+                document.getElementById('admin-json-title').value = '';
+                document.getElementById('admin-json-desc').value = '';
+                document.getElementById('admin-json-textarea').value = '';
+                renderMainStages();
+            } catch (err) {
+                alert('JSON форматында қате бар! Дұрыс синтаксисті тексеріңіз.');
+            }
+        }
+
+        function renderHomeQuote() {
+            const random = motivationalQuotes[Math.floor(Math.random() * motivationalQuotes.length)];
+            document.getElementById('daily-quote').innerText = `"${random.quote}"`;
+            document.getElementById('daily-author').innerText = `— ${random.author}`;
+        }
+
+        function toggleDarkMode() {
+            const htmlEl = document.documentElement;
+            htmlEl.classList.toggle('dark');
+            const isDark = htmlEl.classList.contains('dark');
+            localStorage.setItem('tarih_dark_mode', isDark);
+
+            const themeIcon = document.getElementById('theme-icon');
+            themeIcon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+            const toggleCircle = document.getElementById('settings-toggle-circle');
+            if (toggleCircle) {
+                if (isDark) toggleCircle.classList.add('translate-x-6');
+                else toggleCircle.classList.remove('translate-x-6');
+            }
+        }
+
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('tarih_dark_mode');
+            const isDark = savedTheme === null ? true : (savedTheme === 'true');
+            if (isDark) {
+                document.documentElement.classList.add('dark');
+                document.getElementById('theme-icon').className = 'fa-solid fa-sun';
+            } else {
+                document.documentElement.classList.remove('dark');
+                document.getElementById('theme-icon').className = 'fa-solid fa-moon';
+            }
+        }
+
+        function changeFontSize(size) {
+            if (size === 'large') {
+                document.body.classList.add('text-lg');
+            } else {
+                document.body.classList.remove('text-lg');
+            }
+        }
+    </script>
+</body>
+</html>
